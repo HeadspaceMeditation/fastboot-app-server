@@ -2,6 +2,11 @@ var basicAuth = require('basic-auth');
 
 module.exports = function(username, password) {
   return function(req, res, next) {
+    // Skip basic auth for options requests
+    if (req.method === 'OPTIONS') {
+      return next();
+    }
+
     var user = basicAuth(req);
 
     if (!user || user.name !== username || user.pass !== password) {
