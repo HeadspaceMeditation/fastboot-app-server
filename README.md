@@ -37,6 +37,12 @@ const FastBootAppServer = require('fastboot-app-server');
 let server = new FastBootAppServer({
   distPath: 'dist',
   gzip: true // Optional - Enables gzip compression.
+  sandboxGlobals: {
+    A_GLOBAL_VALUE: 'Some value accessible in the Ember client during SSR',
+    ANOTHER_GLOBAL_VALUE: {
+      passedInFrom: 'the Fastboot server instantiation'
+    }
+  }
 });
 
 server.start();
